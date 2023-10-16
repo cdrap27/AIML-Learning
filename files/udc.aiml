@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+
+<!--takes whatever input the user enters and responds with hello and the input
+should be implemented when the user enters their name-->
+<category>
+    <pattern>*</pattern>
+    <template>hello <star index="1"/></template>
+</category>
+
+<category>
+    <pattern>what is your name</pattern>
+    <template>Heisenberg</template>
+</category>
+
+<!--declare a variable using user input
+Think tag prevents the user input from being displayed again-->
+<category>
+    <pattern>I like *</pattern>
+    <template>I will remember that<think><set name = "like1"><star index="1"/></set></think></template>
+</category>
+
+<!--get the previously declared variable-->
+<category>
+    <pattern>do you remember what I like</pattern>
+    <template>you like <get name = "like1"></get></template>
+</category>
+
+<!--responds to hello with hello-->
+<category>
+    <pattern>hello</pattern>
+    <template>hello</template>
+</category>
+
+<!--only activates if the hello template has already been activated-->
+<category>
+    <pattern>how are you</pattern>
+    <that>hello</that>
+    <template>I am well thank you for asking</template>
+</category>
+
+<!--Picks a random color from the list-->
+<category>
+    <pattern>what is your favorite color</pattern>
+    <template>
+        <random>
+            <li>blue</li>
+            <li>red</li>
+            <li>green</li>
+            <li>yellow</li>
+        </random>
+    </template>
+</category>
+
+<!--take user input and provide a different response for each input-->
+<category>
+    <pattern>my favorite condiment is *</pattern>
+    <template>
+    <think><set name = "condiment"><star index="1"/></set></think>
+    <condition name = "condiment" value = "ketchup">Ketchup is made with tomatoes</condition>
+    <condition name = "condiment" value = "ranch">ranch is made with sour cream and mayonaisse</condition>
+    <condition name = "condiment" value = "mayonaisse">mayonaisse is made with eggs and oil</condition>
+    </template>
+</category>
+
+<!--set a topic-->
+<category>
+    <pattern>lets talk about batman</pattern>
+    <template>
+        <think><set name = "topic">batman</set></think>
+        yes lets discuss batman
+    </template>
+</category>
+<category>
+    <pattern>lets talk about superman</pattern>
+    <template>
+        <think><set name = "topic">superman</set></think>
+        i guess so
+    </template>
+</category>
+
+<!--use set topic-->
+<topic name ="batman">
+    <category>
+        <pattern>who is his sidekick</pattern>
+        <template>robin</template>
+    </category>
+</topic>
+<topic name = "superman">
+    <category>
+        <pattern>who is his sidekick</pattern>
+        <template>superman does not have a sidekick</template>
+    </category>
+</topic>
+
+</aiml>
